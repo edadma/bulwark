@@ -3,11 +3,12 @@ package io.github.edadma.bulwark
 import java.io.File
 import scopt.OParser
 
-case class Args(config: File = new File("bulwark.yaml"),
+case class Args(config: File = new File("bulwark.yaml").getCanonicalFile,
                 verbose: Boolean = false,
                 test: Boolean = false,
                 log: Option[File] = None,
                 command: Option[Command] = None)
+
 trait Command
 case class BackupCommand() extends Command
 
@@ -34,9 +35,13 @@ object Main extends App {
       note(section("General Options")),
       opt[File]('c', "config")
         .valueName("<path>")
-        .action((b, c) => c.copy(config = b))
+        .action((y, c) => c.copy(config = y.getCanonicalFile))
         .text("YAML configuration"),
       help('h', "help").text("prints this usage text"),
+      opt[File]('l', "log")
+        .valueName("<path>")
+        .action((l, c) => c.copy(log = Some(l.getCanonicalFile)))
+        .text("log file"),
       opt[Unit]('t', "test")
         .action((_, c) => c.copy(test = true))
         .text("test run (no modifications)"),
