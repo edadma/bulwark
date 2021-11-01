@@ -14,6 +14,7 @@ import io.github.edadma.yaml.{
   readFromString
 }
 
+import java.nio.file.Path
 import scala.language.postfixOps
 
 package object bulwark {
@@ -22,6 +23,9 @@ package object bulwark {
     Console.err.println(msg)
     sys.exit(1)
   }
+
+  case class Config(period: Long, groups: List[ConfigGroup])
+  case class ConfigGroup(name: String, paths: List[Path], exclude: List[Path])
 
 //  def yaml(s: String): Any = {
 //    def construct(n: YamlNode): Any =
