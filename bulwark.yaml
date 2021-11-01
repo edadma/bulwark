@@ -1,25 +1,12 @@
 period: 2 hours
 backup:
-  ts:
+  dev:
     paths:
-      - /home/ed/v2
+      - /home/ed/dev/bulwark
     exclude:
-      - node_modules/
-      - build/
-  scala:
-    paths:
-      - /home/ed: [dev, dev-sn]
-    exclude:
-      - target/
-      - .bsp/
+      - target
+      - .bsp
   home:
     paths:
-      - /home/ed:
-        - .profile
-        - .ssh
-        - Downloads
-        - Documents
-        - projects
-  system:
-    paths:
-      - /etc/nginx
+      - /home/ed/.profile
+      - /home/ed/.ssh

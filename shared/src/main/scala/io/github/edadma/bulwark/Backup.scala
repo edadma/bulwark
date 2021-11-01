@@ -14,7 +14,7 @@ object Backup {
 
     yaml.readFromString(readFile(config.toString)) match {
       case MapYamlNode(entries) =>
-        entries map {
+        entries foreach {
           case (StringYamlNode("period"), StringYamlNode(period)) =>
           case (StringYamlNode("groups"), MapYamlNode(gs)) =>
             gs map {
